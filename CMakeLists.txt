@@ -10,7 +10,7 @@ add_executable(${PROJECT_NAME}
 
 
 
-# 👇 Tell compiler where matrix2.h is
+
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
