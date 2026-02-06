@@ -37,10 +37,15 @@ int main(void) {
     ScePspVector4 addResult;
     ScePspVector4 mulResult;
     ScePspVector4 subResult;
+    ScePspVector4 divResult;
+    ScePspVector4 madResult;
+    ScePspVector4 add = {.f = {2.0f, 2.0f, 2.0f, 2.0f}};
 
     VFPUAddVec4(&addResult, &a, &b);
     VFPUMulVec4(&mulResult, &a, &b);
     VFPUSubVec4(&subResult, &a, &b);
+    VFPUDivVec4(&divResult, &a, &b);
+    VFPUMADVec4(&madResult, &a, &b, &add);
 
     pspDebugScreenPrintf(
         "A = (%f, %f, %f, %f)\n",
@@ -66,9 +71,23 @@ int main(void) {
 
     pspDebugScreenPrintf
     (
-        "Sub Result = (%f, %f, %f, %f)", 
+        "Sub Result = (%f, %f, %f, %f)\n", 
         subResult.f[0], subResult.f[1],
         subResult.f[2], subResult.f[3]
+    );
+
+    pspDebugScreenPrintf
+    (
+        "Div Result = (%f, %f, %f, %f)\n", 
+        divResult.f[0], divResult.f[1],
+        divResult.f[2], divResult.f[3]
+    );
+
+      pspDebugScreenPrintf
+    (
+        "MAD Result = (%f, %f, %f, %f)\n", 
+        madResult.f[0], madResult.f[1],
+        madResult.f[2], madResult.f[3]
     );
 
     while (1) {

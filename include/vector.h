@@ -50,5 +50,50 @@ static inline ScePspVector4* VFPUSubVec4(ScePspVector4 *v0, ScePspVector4 *v1, S
         :"memory"
 
     );
+    return v0;
 }
 
+
+static inline ScePspVector4* VFPUDivVec4(ScePspVector4 *v0, ScePspVector4 *v1, ScePspVector4 *v2)
+{
+    asm volatile
+    (
+        "lv.q C000, 0(%1)\n"
+        "lv.q C010, 0(%2)\n"
+        "vdiv.q C000, C000, C010\n"
+
+        "sv.q C000, 0(%0)\n"
+
+
+        :
+        :"r"(v0) , "r"(v1) , "r"(v2)
+        :"memory"
+ 
+    );
+
+    return v0;
+}
+
+static inline ScePspVector4* VFPUMADVec4(ScePspVector4 *v0, ScePspVector4 *v1, ScePspVector4 *v2, ScePspVector4 *v3) // multiply vec 4 then add vec4 
+
+{
+
+    asm volatile
+    (
+        "lv.q C010, 0(%1)\n"
+        "lv.q C020, 0(%2)\n"
+        "lv.q C030, 0(%3)\n"
+        "vmul.q C000, C010, C020\n"
+
+        "vadd.q C000, C000, C030\n"
+        "sv.q C000, 0(%0)\n"
+
+        :
+        : "r"(v0), "r"(v1), "r"(v2), "r"(v3)
+        : "memory"
+
+
+    );
+    return v0;
+
+}
